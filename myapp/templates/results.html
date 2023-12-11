@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Django App - Result</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            background-image: url('{% static 'dl.jpg' %}');
+            background-size: cover; /* Adjust as needed */
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        h2 {
+            color: white; /* Sets the text color to white */
+        }
+    </style>
+</head>
+<body>
+    <h2>Denoised Audio</h2>
+    <audio controls>
+        <source src="{% static 'output.wav' %}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
