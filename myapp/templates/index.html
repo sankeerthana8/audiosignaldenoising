@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Your Django App</title>
+
+    <style>
+        body {
+            background: url('{% static "dl.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            padding: 20px;
+            color: #FFF; /* Changed color to white */
+        }
+        .heading {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <script>
+        function displayAudio() {
+            var input = document.getElementById('audio-input');
+            var audioContainer = document.getElementById('audio-container');
+            var audioPlayer = document.getElementById('audio-player');
+
+            var file = input.files[0];
+            var objectURL = URL.createObjectURL(file);
+
+            audioPlayer.src = objectURL;
+            audioContainer.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Audio Signal Denoising Website</h1>
+
+    <div class="container">
+        <h2 class="heading">Upload Noisy Audio</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id="audio-input" name="audio_file" accept="audio/*" required onchange="displayAudio()">
+            <div id="audio-container" style="display: none;">
+                <audio id="audio-player" controls>
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
